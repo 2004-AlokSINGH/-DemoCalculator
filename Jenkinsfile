@@ -5,7 +5,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo 'Preparation...'
-                git 'https://github.com/2004-AlokSINGH/-DemoCalculator.git'
+                git branch: 'main', url: 'https://github.com/2004-AlokSINGH/-DemoCalculator.git'
             }
         }
 
