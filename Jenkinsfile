@@ -1,39 +1,32 @@
 pipeline {
-  
-   agent any
+    agent any
+
     stages {
-        stage('Checkout') {
+        stage('Preparation') {
             steps {
-                echo "Cloning repository..."
+                echo 'Preparation...'
                 git 'https://github.com/2004-AlokSINGH/-DemoCalculator.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo "Building the project..."
-                sh "mvn clean test"
+                echo 'Inside Build.......'
+                bat 'mvn clean test'
             }
         }
 
         stage('Package') {
             steps {
-                echo "Packaging the application..."
-                sh "mvn package"
+                echo 'Inside package.......'
+                bat 'mvn clean'
             }
         }
-    }
 
-    post {
-        success {
-            echo "Build successful!"
+        stage('Results') {
+            steps {
+                echo 'Returning result ....'
+            }
         }
-        failure {
-            echo "Build failed! Check logs."
-        }
-        // always {
-        //     echo "Cleaning workspace..."
-        //     cleanWs()
-        // }
     }
 }
