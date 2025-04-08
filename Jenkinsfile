@@ -1,7 +1,9 @@
-
-
 pipeline {
     agent any
+
+    tools {
+        jdk 'jdk21' // Make sure this matches the name you gave it in Jenkins config
+    }
 
     triggers {
         // Poll SCM every 5 minutes to check for changes
