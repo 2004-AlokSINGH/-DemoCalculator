@@ -29,7 +29,7 @@ public class JenkCalciTest {
     @Test
     public void testAdd2() {
         test = extent.createTest("Addition Test - Negative Case");
-        Assert.assertEquals(JenkCalci.add(4, 3), 8); // Intentional fail
+        Assert.assertEquals(JenkCalci.add(4, 3), 7); 
     }
 
     @Test
@@ -47,7 +47,7 @@ public class JenkCalciTest {
     @Test
     public void testMultiplyFail() {
         test = extent.createTest("Multiplication Fail Test");
-        Assert.assertEquals(JenkCalci.multiply(2, 3), 5); // Intentional fail
+        Assert.assertEquals(JenkCalci.multiply(2, 3), 6); 
     }
 
     @Test
@@ -65,6 +65,6 @@ public class JenkCalciTest {
     @Test
     public void testDivideFail() {
         test = extent.createTest("Division Fail Test");
-        Assert.assertEquals(JenkCalci.divide(10, 2), 4); // Intentional fail
+        Assert.assertEquals(JenkCalci.divide(10, 2), 5); // Intentional fail
     }
 }
