@@ -32,6 +32,13 @@
             <scope>test</scope>
         </dependency>
 
+         <dependency>
+             <groupId>com.aventstack</groupId>
+             <artifactId>extentreports-testng-adapter</artifactId>
+             <version>1.2.2</version> <!-- or latest -->
+         </dependency>
+
+
         <!-- ExtentReports (optional, if you're using it for reports) -->
         <dependency>
             <groupId>com.aventstack</groupId>
