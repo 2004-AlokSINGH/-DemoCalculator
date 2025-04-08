@@ -1,5 +1,5 @@
 import com.aventstack.extentreports.*;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -10,9 +10,9 @@ public class JenkCalciTest {
 
     @BeforeSuite
     public void setupReport() {
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("test-output/ExtentReport.html");
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("test-output/ExtentReport.html");
         extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
+        extent.attachReporter(sparkReporter);
     }
 
     @AfterSuite
@@ -29,7 +29,7 @@ public class JenkCalciTest {
     @Test
     public void testAdd2() {
         test = extent.createTest("Addition Test - Negative Case");
-        Assert.assertEquals(JenkCalci.add(4, 3), 8); // Fail (expected 7)
+        Assert.assertEquals(JenkCalci.add(4, 3), 8); // Intentional fail
     }
 
     @Test
@@ -47,7 +47,7 @@ public class JenkCalciTest {
     @Test
     public void testMultiplyFail() {
         test = extent.createTest("Multiplication Fail Test");
-        Assert.assertEquals(JenkCalci.multiply(2, 3), 5); // Fail (expected 6)
+        Assert.assertEquals(JenkCalci.multiply(2, 3), 5); // Intentional fail
     }
 
     @Test
@@ -59,12 +59,12 @@ public class JenkCalciTest {
     @Test(expectedExceptions = ArithmeticException.class)
     public void testDivideByZero() {
         test = extent.createTest("Division by Zero Test");
-        JenkCalci.divide(5, 0); // should throw ArithmeticException
+        JenkCalci.divide(5, 0);
     }
 
     @Test
     public void testDivideFail() {
         test = extent.createTest("Division Fail Test");
-        Assert.assertEquals(JenkCalci.divide(10, 2), 4); // Fail (expected 5)
+        Assert.assertEquals(JenkCalci.divide(10, 2), 4); // Intentional fail
     }
 }
