@@ -52,17 +52,17 @@ pipeline {
                 archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
                 junit 'target/surefire-reports/*.xml'
 
-                // Archive and publish Extent HTML report
-                archiveArtifacts artifacts: 'test-output/ExtentReports.html', allowEmptyArchive: true
-
+                archiveArtifacts artifacts: 'test-output/ExtentReport.html', allowEmptyArchive: true
+                
                 publishHTML(target: [
                     reportName: 'Extent HTML Report',
                     reportDir: 'test-output',
-                    reportFiles: 'ExtentReports.html',
+                    reportFiles: 'ExtentReport.html',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
                     allowMissing: true
                 ])
+
             }
         }
 
