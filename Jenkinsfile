@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     tools {
-        jdk 'jdk21' // Make sure this matches the name you gave it in Jenkins config
+        jdk 'jdk21' // Make sure this matches your Jenkins configuration
     }
 
     triggers {
-        // Poll SCM every 5 minutes to check for changes
-        pollSCM('H/5 * * * *') 
+        pollSCM('H/5 * * * *') // Poll every 5 minutes
     }
 
     stages {
@@ -19,7 +18,6 @@ pipeline {
                 echo 'Preparing workspace...'
                 script {
                     try {
-                        // Cloning the repository
                         checkout scm
                         echo 'Repository cloned successfully.'
                     } catch (Exception e) {
@@ -50,8 +48,21 @@ pipeline {
         stage('Test Report') {
             steps {
                 echo 'Archiving Test Reports...'
-                archiveArtifacts 'target/surefire-reports/*.xml'
+                // Archive TestNG XML reports
+                archiveArtifacts artifacts: 'target/surefire-reports/*.xml', allowEmptyArchive: true
                 junit 'target/surefire-reports/*.xml'
+
+                // Archive and publish Extent HTML report
+                archiveArtifacts artifacts: 'test-output/ExtentReports.html', allowEmptyArchive: true
+
+                publishHTML(target: [
+                    reportName: 'Extent HTML Report',
+                    reportDir: 'test-output',
+                    reportFiles: 'ExtentReports.html',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: true
+                ])
             }
         }
 
